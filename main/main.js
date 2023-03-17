@@ -1,7 +1,10 @@
 const library = Deno.dlopen("target.ignore/debug/deps/libfornix.dylib", {
-    add: {
-        parameters: ['f64', 'f64',], result: "f64", 
-    }
+    print_stuff: {
+        parameters: ['buffer'],
+        result: "void", 
+    },
 })
 
-console.debug(`library.symbols.add(10, 45.5) is:`,library.symbols.add(10, 45.5))
+library.symbols.print_stuff(new TextEncoder().encode("Howdy\0"))
+
+// console.debug(`library.symbols.add(10, 45.5) is:`,)
